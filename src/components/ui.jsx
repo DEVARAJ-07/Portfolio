@@ -55,13 +55,13 @@ export function SectionHeading({ title, subtitle }) {
     return (
         <div className="text-center mb-16">
             <ScrollReveal>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                    <span className="text-gradient">{title}</span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                    {title}
                 </h2>
                 {subtitle && (
-                    <p className="text-dark-300 max-w-2xl mx-auto text-lg">{subtitle}</p>
+                    <p className="text-gray-300 max-w-2xl mx-auto text-lg">{subtitle}</p>
                 )}
-                <div className="w-20 h-1 bg-gradient-to-r from-accent-500 to-accent-300 mx-auto mt-6 rounded-full" />
+                <div className="w-20 h-1 bg-white mx-auto mt-6 rounded-full" />
             </ScrollReveal>
         </div>
     )

@@ -23,6 +23,8 @@
   --color-cyan-500: #14b8a6;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-arabic: 'El Messiri', sans-serif;
 }
 
 /* ── Base Styles ── */
@@ -40,12 +42,16 @@
 
   body {
     font-family: var(--font-sans);
-    background: linear-gradient(180deg, #020617 0%, #0c1222 50%, #0f172a 100%);
+    background: transparent;
     color: var(--color-dark-100);
     line-height: 1.7;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
 
   ::selection {
@@ -93,17 +99,15 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 35%, #a78bfa 65%, #2dd4bf 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
   }
 
   .text-gradient-subtle {
-    background: linear-gradient(135deg, #f1f5f9 0%, #c4b5fd 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+  }
+
+  .mirror-white {
+    color: #ffffff;
   }
 
   .hover-glow {
@@ -130,6 +134,10 @@
 
   .animate-float {
     animation: float 4s ease-in-out infinite;
+  }
+
+  .font-arabic {
+    font-family: var(--font-arabic);
   }
 }
 
