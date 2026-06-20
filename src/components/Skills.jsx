@@ -1,138 +1,107 @@
 import { motion } from 'framer-motion'
-import { ScrollReveal, Container } from './ui'
-import { HiSparkles } from 'react-icons/hi'
-import {
-    SiReact, SiJavascript, SiNodedotjs,
-    SiGit, SiMongodb, SiGithub,
-    SiHtml5, SiCsswizardry, SiFlutter, SiMysql,
-    SiSupabase, SiExpress, SiAndroidstudio, SiPython,
-} from 'react-icons/si'
-import { FaJava, FaCode } from 'react-icons/fa'
+import { FaJava, FaCode, FaDatabase, FaAws, FaDocker, FaLinux, FaRobot, FaCss3Alt } from 'react-icons/fa'
+import { SiJavascript, SiPython, SiReact, SiNextdotjs, SiHtml5, SiNodedotjs, SiExpress, SiFastapi, SiJsonwebtokens, SiFlutter, SiDart, SiMongodb, SiMysql, SiPostgresql, SiSupabase, SiGit, SiGithub, SiPostman, SiAndroidstudio, SiGithubactions } from 'react-icons/si'
+import { VscVscode } from 'react-icons/vsc'
 
 const skillCategories = [
     {
         title: 'Programming Languages',
         skills: [
-            { name: 'Java', icon: <FaJava />, color: '#ED8B00' },
-            { name: 'C', icon: <FaCode />, color: '#A8B9CC' },
-            { name: 'Python', icon: <SiPython />, color: '#3776AB', note: 'Basics' },
+            { name: 'Java', icon: <FaJava className="text-2xl text-[#f89820]" /> },
+            { name: 'C', icon: <FaCode className="text-2xl text-[#00599c]" /> },
+            { name: 'SQL', icon: <FaDatabase className="text-2xl text-[#00758f]" /> },
+            { name: 'JavaScript', icon: <SiJavascript className="text-2xl text-[#f7df1e]" /> },
+            { name: 'Python (Basics)', icon: <SiPython className="text-2xl text-[#3776ab]" /> },
         ],
     },
     {
-        title: 'Web Development',
+        title: 'Frontend Development',
         skills: [
-            { name: 'HTML5', icon: <SiHtml5 />, color: '#E34F26' },
-            { name: 'CSS3', icon: <SiCsswizardry />, color: '#1572B6' },
-            { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E' },
-            { name: 'React.js', icon: <SiReact />, color: '#61DAFB' },
-            { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933' },
-            { name: 'Express.js', icon: <SiExpress />, color: '#ffffff' },
+            { name: 'React.js', icon: <SiReact className="text-2xl text-[#61dafb]" /> },
+            { name: 'Next.js', icon: <SiNextdotjs className="text-2xl text-white" /> },
+            { name: 'HTML5', icon: <SiHtml5 className="text-2xl text-[#e34f26]" /> },
+            { name: 'CSS3', icon: <FaCss3Alt className="text-2xl text-[#1572b6]" /> },
+            { name: 'REST API Integration', icon: <FaCode className="text-2xl text-teal-400" /> },
         ],
     },
     {
-        title: 'Mobile App Development',
+        title: 'Backend Development',
         skills: [
-            { name: 'Android Studio', icon: <SiAndroidstudio />, color: '#3DDC84' },
-            { name: 'Flutter', icon: <SiFlutter />, color: '#02569B' },
+            { name: 'Node.js', icon: <SiNodedotjs className="text-2xl text-[#339933]" /> },
+            { name: 'Express.js', icon: <SiExpress className="text-2xl text-slate-100" /> },
+            { name: 'FastAPI', icon: <SiFastapi className="text-2xl text-[#009688]" /> },
+            { name: 'JWT Authentication', icon: <SiJsonwebtokens className="text-2xl text-[#fb015b]" /> },
         ],
     },
     {
-        title: 'Database & Tools',
+        title: 'Mobile Development',
         skills: [
-            { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248' },
-            { name: 'MySQL', icon: <SiMysql />, color: '#4479A1' },
-            { name: 'Supabase', icon: <SiSupabase />, color: '#3ECF8E' },
-            { name: 'Git', icon: <SiGit />, color: '#F05032' },
-            { name: 'GitHub', icon: <SiGithub />, color: '#ffffff' },
+            { name: 'Flutter', icon: <SiFlutter className="text-2xl text-[#02569b]" /> },
+            { name: 'Dart', icon: <SiDart className="text-2xl text-[#0175c2]" /> },
         ],
     },
-]
-
-const professionalSkills = [
-    'Problem Solving',
-    'Time Management',
-    'Communication',
-    'Decision Making',
-    'Debugging',
-    'Leadership',
+    {
+        title: 'Databases',
+        skills: [
+            { name: 'MongoDB', icon: <SiMongodb className="text-2xl text-[#47a248]" /> },
+            { name: 'MySQL', icon: <SiMysql className="text-2xl text-[#00758f]" /> },
+            { name: 'PostgreSQL', icon: <SiPostgresql className="text-2xl text-[#336791]" /> },
+            { name: 'Supabase', icon: <SiSupabase className="text-2xl text-[#3ecf8e]" /> },
+        ],
+    },
+    {
+        title: 'Cloud & DevOps',
+        skills: [
+            { name: 'AWS (EC2, S3, Lambda)', icon: <FaAws className="text-2xl text-[#ff9900]" /> },
+            { name: 'Docker', icon: <FaDocker className="text-2xl text-[#2496ed]" /> },
+            { name: 'CI/CD & GitHub Actions', icon: <SiGithubactions className="text-2xl text-[#2088ff]" /> },
+            { name: 'Linux', icon: <FaLinux className="text-2xl text-[#fcc624]" /> },
+        ],
+    },
+    {
+        title: 'Tools & Version Control',
+        skills: [
+            { name: 'Git', icon: <SiGit className="text-2xl text-[#f05032]" /> },
+            { name: 'GitHub', icon: <SiGithub className="text-2xl text-white" /> },
+            { name: 'Postman', icon: <SiPostman className="text-2xl text-[#ff6c37]" /> },
+            { name: 'VS Code', icon: <VscVscode className="text-2xl text-[#007acc]" /> },
+            { name: 'Android Studio', icon: <SiAndroidstudio className="text-2xl text-[#3ddc84]" /> },
+            { name: 'LM Studio', icon: <FaRobot className="text-2xl text-purple-400" /> },
+        ],
+    },
 ]
 
 export default function Skills() {
     return (
-        <Container id="skills" className="bg-dark-900/30">
-            <div className="text-center mb-16">
-                <ScrollReveal>
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-accent-400 text-xs font-medium mb-4 uppercase tracking-widest">
-                        <HiSparkles />
-                        <span>Tech Stack</span>
-                    </div>
-                    {/* Projects Built badge removed per request */}
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        <span className="text-gradient">Skills & Technologies</span>
-                    </h2>
-                    <p className="text-dark-300 max-w-2xl mx-auto text-lg">
-                        Technologies I work with and tools I use regularly
-                    </p>
-                    <div className="w-20 h-1 bg-gradient-to-r from-accent-500 to-cyan-400 mx-auto mt-6 rounded-full" />
-                </ScrollReveal>
-            </div>
-
-            {/* Technical Skills */}
-            <div className="space-y-12 mb-16">
+        <div className="max-w-5xl w-full mx-auto p-8 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
+            <div className="space-y-10">
                 {skillCategories.map((category, catIdx) => (
-                    <ScrollReveal key={category.title} delay={catIdx * 0.1}>
-                        <h3 className="text-lg font-semibold text-dark-200 mb-6 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-accent-500" />
+                    <div key={category.title}>
+                        <h4 className="text-sm font-semibold text-slate-100 mb-5 flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                             {category.title}
-                        </h3>
+                        </h4>
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                            {category.skills.map((skill) => (
+                            {category.skills.map((skill, i) => (
                                 <motion.div
                                     key={skill.name}
-                                    whileHover={{ y: -5, scale: 1.03 }}
-                                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                    className="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 hover:border-accent-500/20 transition-all duration-300 relative overflow-hidden cursor-pointer"
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: catIdx * 0.04 + i * 0.015 }}
+                                    className="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all flex flex-col items-center justify-center gap-2.5 text-center group"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-accent-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    <span
-                                        className="text-2xl transition-all duration-300 group-hover:scale-110 relative z-10"
-                                        style={{ color: skill.color }}
-                                    >
+                                    <div className="transition-transform group-hover:scale-110">
                                         {skill.icon}
-                                    </span>
-                                    <div className="text-center relative z-10">
-                                        <span className="text-dark-300 text-sm font-medium group-hover:text-dark-100 transition-colors block">
-                                            {skill.name}
-                                        </span>
-                                        {skill.note && (
-                                            <span className="text-dark-500 text-xs">({skill.note})</span>
-                                        )}
                                     </div>
+                                    <span className="text-slate-200 text-xs font-normal tracking-wide group-hover:text-white transition-colors font-newsreader italic">
+                                        {skill.name}
+                                    </span>
                                 </motion.div>
                             ))}
                         </div>
-                    </ScrollReveal>
+                    </div>
                 ))}
             </div>
-
-            {/* Professional Skills */}
-            <ScrollReveal>
-                <h3 className="text-lg font-semibold text-dark-200 mb-6 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                    Professional Skills
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                    {professionalSkills.map((skill) => (
-                        <motion.span
-                            key={skill}
-                            whileHover={{ scale: 1.05 }}
-                            className="px-5 py-2.5 glass-card rounded-2xl text-sm font-medium text-dark-200 hover:text-accent-400 hover:border-accent-500/20 transition-all duration-300 cursor-default"
-                        >
-                            {skill}
-                        </motion.span>
-                    ))}
-                </div>
-            </ScrollReveal>
-        </Container>
+        </div>
     )
 }

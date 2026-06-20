@@ -1,0 +1,207 @@
+\documentclass[a4paper,9pt]{article}
+
+\usepackage{url}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.89]{geometry}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+\usepackage{microtype}
+
+% ── spacing tweaks ──────────────────────────────────────────────────────────
+\setlength{\parskip}{2pt}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{0.97}
+
+% ── section title style ─────────────────────────────────────────────────────
+\titleformat{\section}{\large\scshape\raggedright}{}{0em}{}[\titrule]
+\titlespacing{\section}{0pt}{7pt}{4pt}
+
+% ── custom column type ───────────────────────────────────────────────────────
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+% ── hyperlink colours ────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  linkcolor=black
+}
+
+\begin{document}
+\pagestyle{empty}
+
+% ============================================================
+% HEADER
+% ============================================================
+\begin{center}
+  {\Large \textbf{DEVARAJ S}}\\[4pt]
+  {\small Full Stack Developer $|$ MERN Stack $|$ Next.js $|$ Flutter $|$ AWS}\\[5pt]
+  \small
+  \href{https://devaraj-07.github.io/Portfolio/}{\faGlobe\ Portfolio} \;\;
+  \href{https://linkedin.com/in/devarajvetrii}{\faLinkedin\ LinkedIn} \;\;
+  \href{https://github.com/DEVARAJ-07}{\faGithub\ GitHub} \;\;
+  \href{mailto:devarajsubramani20@gmail.com}{\faEnvelope\ devarajsubramani20@gmail.com} \;\;
+  \faMobile\ +91\,9894880175
+\end{center}
+
+\vspace{4pt}
+
+% ============================================================
+% PROFESSIONAL SUMMARY
+% ============================================================
+\section{Professional Summary}
+{\small
+Full Stack Developer specializing in the \textbf{MERN stack} with hands-on experience building, testing, and deploying scalable web and mobile applications.
+Proficient in \textbf{Flutter} cross-platform mobile development, \textbf{CI/CD} via GitHub Actions, and cloud deployments on \textbf{AWS}, focused on solving real-world problems through clean, efficient code.
+}
+
+% ============================================================
+% TECHNICAL SKILLS
+% ============================================================
+\section{Technical Skills}
+{\small
+\begin{tabularx}{\linewidth}{@{} l X @{}}
+  \textbf{Languages}               & Java, C, SQL, Python\\[2pt]
+  \textbf{Frontend}                & React.js, Next.js, HTML5, CSS3, REST API Integration \\[2pt]
+  \textbf{Backend}                 & Node.js, Express.js, FastAPI, JWT Authentication \\[2pt]
+  \textbf{Mobile}                  & Flutter, Dart \\[2pt]
+  \textbf{Databases}               & MongoDB, MySQL, PostgreSQL, Supabase \\[2pt]
+  \textbf{Cloud \& DevOps}         & AWS (EC2, S3, Lambda), Docker, CI/CD, GitHub Actions, Linux \\[2pt]
+  \textbf{Tools \& Version Control}& Git, GitHub, Postman, VS Code, Android Studio, LM Studio \\
+\end{tabularx}
+}
+
+% ============================================================
+% EDUCATION
+% ============================================================
+\section{Education}
+{\small
+\begin{tabularx}{\linewidth}{@{} l X r @{}}
+  2023\,--\,2027 &
+  \textbf{Bachelor of Engineering, Computer Science and Engineering} \newline
+  Dr.\ N.G.P.\ Institute of Technology, Coimbatore
+  & CGPA:\ 8.01 \\
+\end{tabularx}
+}
+
+% ============================================================
+% WORK EXPERIENCE
+% ============================================================
+\section{Work Experience}
+{\small
+\noindent
+\textbf{Software Development Intern} \hfill
+\textit{SkyLena Info Technology Pvt.\ Ltd.\ $|$ June 2025\,--\,July 2025}
+
+\begin{itemize}[nosep, leftmargin=1em, itemsep=2pt]
+  \item Engineered \textbf{QuickBuy}, a full-stack e-commerce web application featuring
+        product browsing, cart management, and an end-to-end order flow using
+        \textbf{HTML5, CSS3, and JavaScript}, reducing manual shopping workflow time
+        by over \textbf{60\%} compared to the prior process.
+  \item Delivered \textbf{responsive, cross-browser-compatible} UI components that improved
+        interface accessibility across all major browsers.
+\end{itemize}
+}
+
+% ============================================================
+% TECHNICAL PROJECTS
+% ============================================================
+\section{Technical Projects}
+
+{\small
+
+% ── Project 1 ──────────────────────────────────────────────
+\noindent
+\textbf{The Smart ATM\,---\,Cardless Cash Withdrawal System}\;
+\href{https://github.com/DEVARAJ-07/SmartATM}{\faGithub\ }
+\hfill
+\textit{React.js, Node.js, Express.js, MongoDB, Twilio API, JWT}
+
+\begin{itemize}[leftmargin=1em, itemsep=2pt]
+  \item Architected a secure, full-stack banking web application enabling cardless
+        withdrawals via \textbf{OTP-based two-factor authentication}, integrating
+        the \textbf{Twilio REST API} for real-time SMS delivery.
+  \item Designed a \textbf{RESTful API} backend with \textbf{Node.js/Express.js} and
+        \textbf{MongoDB schema design}, enforcing daily transaction limits,
+        \textbf{JWT session management}, multi-step OTP verification, and input
+        sanitization, reducing unauthorized-access risk by \textbf{90\%} in
+        penetration tests.
+\end{itemize}
+
+\vspace{3pt}
+
+% ── Project 2 ──────────────────────────────────────────────
+\noindent
+\textbf{SmartEco\,---\,AI-Driven Campus Resource Optimizer}\;
+\href{https://github.com/DEVARAJ-07/SmartEco}{\faGithub\ }
+\hfill
+\textit{React.js, FastAPI, Python, Random Forest, REST API}
+
+\begin{itemize}[leftmargin=1em, itemsep=2pt]
+  \item Built a full-stack sustainability platform with a \textbf{React.js} frontend
+        consuming a \textbf{Python FastAPI} REST API, integrating a
+        \textbf{Random Forest ML model} that achieved \textbf{87\% prediction
+        accuracy} for forecasting campus energy and resource consumption.
+  \item Engineered a real-time environmental monitoring dashboard with dynamic
+        \textbf{data visualization} (charts and trend graphs), reducing manual
+        resource-audit time by \textbf{40\%} for campus administrators and cutting
+        weekly reporting overhead by \textbf{3 hours}.
+\end{itemize}
+
+\vspace{3pt}
+
+% ── Project 3 ──────────────────────────────────────────────
+\noindent
+\textbf{StudentBuddy\,---\,AI-Powered Smart Mentoring Platform}\;
+\href{https://github.com/DEVARAJ-07/StudentBuddy}{\faGithub\ }
+\hfill
+\textit{Flutter, Dart, React.js, Node.js, Supabase, LLM Integration, JWT}
+
+\begin{itemize}[leftmargin=1em, itemsep=2pt]
+  \item Developed a cross-platform mentoring application with a
+        \textbf{Flutter (Dart)} frontend backed by \textbf{Supabase}, enabling
+        \textbf{real-time one-to-one messaging} and unit-tested with
+        \textbf{40+ live users}.
+  \item Integrated a locally hosted \textbf{LLM} (via LM Studio) as an AI chatbot
+        delivering \textbf{context-aware academic responses} with a
+        \textbf{privacy-first architecture}.
+  \item Designed a \textbf{RESTful API} with \textbf{Node.js} enforcing
+        \textbf{JWT authentication}, multi-role access control
+        (student\,/\,mentor\,/\,admin), and relational \textbf{database schema
+        design} for user relationships.
+\end{itemize}
+
+}
+
+% ============================================================
+% CERTIFICATIONS & ACHIEVEMENTS
+% ============================================================
+\section{Certifications \& Achievements}
+{\small
+\begin{itemize}[nosep, leftmargin=1em, itemsep=3pt]
+
+  % ── Certifications ─────────────────────────────────────────
+  \item \textbf{Generative AI: Working with Large Language Models} \,--\, May 2026
+  \item \textbf{Cloud Computing} \,--\, NPTEL, 2024
+  \item \textbf{Industrial IoT} \,--\, NPTEL, 2025
+
+  % ── Hackathon Achievements ─────────────────────────────────
+  \item \textbf{Smart India Hackathon (2023\,-\,2024)} \,--\, Selected in the \textbf{First Round}
+        in both \textbf{2023} and \textbf{2024} editions, advancing through internal
+        institutional screening among competing student teams.
+
+  \item \textbf{MSME Idea Hackathon 5.0 (2025\,-\,2026)} \,--\, Advanced to the
+        \textbf{Final Round} and were \textbf{shortlisted for project selection} by
+        MSME evaluators, representing one of the top teams from the national-level competition.
+
+\end{itemize}
+}
+
+\end{document}

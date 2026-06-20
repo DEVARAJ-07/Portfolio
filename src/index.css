@@ -38,6 +38,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    overscroll-behavior: none; /* Prevents back/forward swipe navigation in browser */
   }
 
   body {
@@ -45,7 +46,10 @@
     background: transparent;
     color: var(--color-dark-100);
     line-height: 1.7;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    overscroll-behavior: none; /* Prevents back/forward swipe navigation in browser */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -136,8 +140,108 @@
     animation: float 4s ease-in-out infinite;
   }
 
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(40px, -60px) scale(1.08);
+    }
+    66% {
+      transform: translate(-30px, 30px) scale(0.92);
+    }
+  }
+
+  @keyframes float-slower {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    50% {
+      transform: translate(-50px, 50px) scale(1.15);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 22s ease-in-out infinite;
+  }
+
+  .animate-float-slower {
+    animation: float-slower 32s ease-in-out infinite;
+  }
+
   .font-arabic {
     font-family: var(--font-arabic);
+  }
+
+  .font-newsreader {
+    font-family: 'Newsreader', Georgia, serif;
+  }
+
+  /* ── visionOS Apple Vision Pro UI ── */
+  .vision-window {
+    background: var(--window-bg, rgba(28, 34, 52, 0.38));
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid var(--window-border, rgba(255, 255, 255, 0.22));
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    will-change: transform, opacity;
+    contain: layout style;
+    transition: background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .vision-dock {
+    background: rgba(32, 38, 58, 0.68);
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .vision-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+  }
+
+  .vision-card:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: scale(1.03) translateY(-2px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Thin scrollbar for visionOS panels - Hidden completely */
+  .vision-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .vision-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* ── Rain Animation ── */
+  @keyframes rain {
+    0% {
+      transform: translateY(-120px) translateX(0) rotate(12deg);
+    }
+    100% {
+      transform: translateY(105vh) translateX(-80px) rotate(12deg);
+    }
+  }
+
+  .rain-drop {
+    position: absolute;
+    background: linear-gradient(transparent, rgba(160, 190, 220, 0.22));
+    width: 1px;
+    animation: rain linear infinite;
+    pointer-events: none;
+    will-change: transform;
   }
 }
 
@@ -152,4 +256,20 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Webkit Autofill & Copy-Paste overrides ── */
+/* Prevents white/light-blue background or white text visual glitches when copy-pasting/autofilling email */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0b0c10 inset !important;
+  box-shadow: 0 0 0px 1000px #0b0c10 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
