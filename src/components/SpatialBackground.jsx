@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 // Generate randomized rain drops that persist across renders at module level
@@ -12,8 +12,19 @@ const STATIC_RAIN_DROPS = Array.from({ length: 45 }, (_, idx) => ({
 }))
 
 export default function SpatialBackground() {
+  const [isVisible, setIsVisible] = useState(true)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden)
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [])
 
   // Tight spring — high stiffness removes mouse-movement lag tail
   const springConfig = { damping: 28, stiffness: 180 }
@@ -21,6 +32,11 @@ export default function SpatialBackground() {
   const y = useSpring(mouseY, springConfig)
 
   useEffect(() => {
+    if (!isVisible) return
+
+    const isTouch = window.matchMedia('(hover: none)').matches
+    if (isTouch) return
+
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e
       const { innerWidth, innerHeight } = window
@@ -37,7 +53,7 @@ export default function SpatialBackground() {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [mouseX, mouseY])
+  }, [mouseX, mouseY, isVisible])
 
   return (
     <div className="fixed inset-0 w-screen h-screen z-0 overflow-hidden bg-[#020205] select-none pointer-events-none">
@@ -58,30 +74,34 @@ export default function SpatialBackground() {
       </motion.div>
 
       {/* Atmospheric Rain Particles (Overlay on background layer) */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden z-10">
-        {STATIC_RAIN_DROPS.map((drop) => (
-          <div
-            key={drop.id}
-            className="rain-drop"
-            style={{
-              left: drop.left,
-              animationDelay: drop.delay,
-              animationDuration: drop.duration,
-              height: drop.height,
-              opacity: drop.opacity,
-            }}
-          />
-        ))}
-      </div>
+      {isVisible && (
+        <div className="absolute inset-0 w-full h-full overflow-hidden z-10">
+          {STATIC_RAIN_DROPS.map((drop) => (
+            <div
+              key={drop.id}
+              className="rain-drop"
+              style={{
+                left: drop.left,
+                animationDelay: drop.delay,
+                animationDuration: drop.duration,
+                height: drop.height,
+                opacity: drop.opacity,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Floating Animated Nebula Orbs for ambient light overlay (Slightly dimmed to keep it clean) */}
-      <div className="absolute inset-0 w-full h-full mix-blend-screen opacity-20 z-15">
-        {/* Dark Blue/Teal Nebula Orb */}
-        <div className="absolute -top-1/4 -left-1/4 w-[75vw] h-[75vw] rounded-full bg-teal-800/12 blur-[130px] animate-float-slow" />
-        
-        {/* Slate/Indigo Nebula Orb */}
-        <div className="absolute -bottom-1/4 -right-1/4 w-[65vw] h-[65vw] rounded-full bg-slate-800/12 blur-[110px] animate-float-slower" />
-      </div>
+      {isVisible && (
+        <div className="absolute inset-0 w-full h-full mix-blend-screen opacity-20 z-15">
+          {/* Dark Blue/Teal Nebula Orb */}
+          <div className="absolute -top-1/4 -left-1/4 w-[75vw] h-[75vw] rounded-full bg-teal-800/12 blur-[130px] animate-float-slow" />
+          
+          {/* Slate/Indigo Nebula Orb */}
+          <div className="absolute -bottom-1/4 -right-1/4 w-[65vw] h-[65vw] rounded-full bg-slate-800/12 blur-[110px] animate-float-slower" />
+        </div>
+      )}
 
       {/* Subtle Spatial Mesh / Grid Overlay for depth perspective */}
       <div 

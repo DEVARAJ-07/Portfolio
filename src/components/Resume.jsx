@@ -212,19 +212,19 @@ Proficient in \\textbf{Flutter} cross-platform mobile development, \\textbf{CI/C
 
 export default function Resume() {
     return (
-        <div className="max-w-5xl w-full mx-auto p-6 md:p-8 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
+        <div className="max-w-5xl w-full mx-auto p-4 md:p-8 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
             <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-full rounded-2xl bg-white/[0.93] text-slate-900 border border-white/25 p-6 sm:p-10 shadow-inner select-text"
+                className="w-full rounded-2xl bg-white/[0.93] text-slate-900 border border-white/25 p-4 sm:p-10 shadow-inner select-text"
             >
                 {/* Styled A4 sheet layout content */}
                 <div className="space-y-4 text-left max-w-full font-newsreader" style={{ textShadow: 'none' }}>
                     {/* Header */}
                     <div className="text-center border-b border-slate-300 pb-3">
-                        <h1 className="text-5xl font-bold tracking-wide text-slate-900" style={{ fontFamily: '"Times New Roman", Times, serif' }}>DEVARAJ S</h1>
-                        <p className="text-[15.5px] font-bold text-slate-700 mt-2 uppercase tracking-wider" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                        <h1 className="text-3xl sm:text-5xl font-bold tracking-wide text-slate-900" style={{ fontFamily: '"Times New Roman", Times, serif' }}>DEVARAJ S</h1>
+                        <p className="text-[11px] sm:text-[15.5px] font-bold text-slate-700 mt-2 uppercase tracking-wider" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
                             Full Stack Developer | MERN Stack | Next.js | Flutter | AWS
                         </p>
                         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[13px] text-slate-700 mt-2 font-semibold font-sans">

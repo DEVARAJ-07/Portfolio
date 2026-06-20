@@ -136,7 +136,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="max-w-5xl w-full mx-auto p-8 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar flex flex-col gap-6">
+    <div className="max-w-5xl w-full mx-auto p-5 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar flex flex-col gap-6">
 
       {/* Header */}
       <div className="space-y-1 select-text shrink-0">
@@ -178,7 +178,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="p-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-lg"
+          className="p-6 rounded-3xl bg-white/[0.04] border border-white/10 shadow-lg"
         >
           <form className="space-y-4" onSubmit={handleSubmit}>
 
@@ -251,7 +251,7 @@ export default function Contact() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute inset-0 rounded-full border border-white/12 bg-black/30 backdrop-blur-sm overflow-hidden flex items-center justify-center gap-2 font-newsreader italic text-sm tracking-wide text-white/80 select-none"
+                    className="absolute inset-0 rounded-full border border-white/12 bg-slate-950/90 overflow-hidden flex items-center justify-center gap-2 font-newsreader italic text-sm tracking-wide text-white/80 select-none"
                   >
                     <SendingPaperPlane />
                     <span className="animate-pulse">

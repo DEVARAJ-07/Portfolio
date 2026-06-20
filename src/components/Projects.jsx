@@ -55,7 +55,7 @@ const projectsList = [
 
 export default function Projects() {
     return (
-        <div className="max-w-5xl w-full mx-auto p-8 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
+        <div className="max-w-5xl w-full mx-auto p-5 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
             <div className="flex flex-col gap-6">
                 {projectsList.map((proj, i) => (
                     <motion.div

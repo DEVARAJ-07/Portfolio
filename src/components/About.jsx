@@ -27,11 +27,11 @@ export default function About() {
   ]
 
   return (
-    <div className="max-w-5xl w-full mx-auto p-8 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-hidden pr-2">
-      <div className="grid md:grid-cols-12 gap-8 h-full items-stretch">
+    <div className="max-w-5xl w-full mx-auto p-5 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto md:overflow-hidden pr-2">
+      <div className="grid md:grid-cols-12 gap-8 md:h-full items-stretch">
 
         {/* ── Specimen Plate Frame ── */}
-        <div className="md:col-span-5 flex flex-col items-center justify-center h-full">
+        <div className="md:col-span-5 flex flex-col items-center justify-center md:h-full">
           <div className="relative">
 
             {/*
@@ -105,7 +105,7 @@ export default function About() {
         </div>
 
         {/* Biography Content */}
-        <div className="md:col-span-7 h-full overflow-y-auto pr-2 pb-6 vision-scrollbar space-y-6">
+        <div className="md:col-span-7 md:h-full md:overflow-y-auto pr-2 pb-6 vision-scrollbar space-y-6">
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}

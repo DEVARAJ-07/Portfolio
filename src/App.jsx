@@ -31,7 +31,7 @@ const PAGE_COMPONENTS = [
 
 // Tightest spring that still looks organic — no mass property (framer default = 1 but omitting
 // lets framer use its tighter internal default), high stiffness = instant snap, damping kills bounce.
-const CARD_SPRING = { type: 'spring', stiffness: 380, damping: 36 }
+const CARD_SPRING = { type: 'spring', stiffness: 220, damping: 28, mass: 0.8 }
 const HEADER_SPRING = { type: 'spring', stiffness: 420, damping: 32, mass: 0.5 }
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
   const [isHeaderHovered, setIsHeaderHovered] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
     checkMobile()
     window.addEventListener('resize', checkMobile, { passive: true })
     return () => window.removeEventListener('resize', checkMobile)
@@ -189,12 +189,12 @@ function App() {
             if (rel === 0) {
               xOffset = '0px'; scale = 1; opacity = 1; zIndex = 30; rotateY = 0; z = 0
             } else if (rel === -1) {
-              xOffset = isMobile ? '-100vw' : '-44vw'
+              xOffset = isMobile ? '-100vw' : '-58vw'
               scale   = isMobile ? 0.75 : 0.78
               opacity = isMobile ? 0 : 0.72
               zIndex  = 20; rotateY = isMobile ? 0 : 25; z = isMobile ? -200 : -220
             } else if (rel === 1) {
-              xOffset = isMobile ? '100vw' : '44vw'
+              xOffset = isMobile ? '100vw' : '58vw'
               scale   = isMobile ? 0.75 : 0.78
               opacity = isMobile ? 0 : 0.72
               zIndex  = 20; rotateY = isMobile ? 0 : -25; z = isMobile ? -200 : -220
@@ -217,10 +217,11 @@ function App() {
                   // GPU-promote this layer BEFORE the animation starts
                   willChange: 'transform, opacity',
                   pointerEvents: isVisible ? 'auto' : 'none',
-                  '--window-bg':     rel === 0 ? 'rgba(8,10,16,0.82)'  : 'rgba(12,14,22,0.65)',
+                  '--window-bg':     rel === 0 ? 'rgba(8,10,16,0.92)'  : 'rgba(12,14,22,0.65)',
                   '--window-border': rel === 0 ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.11)',
                 }}
-                animate={{ x: xOffset, scale, opacity, zIndex, rotateY, z }}
+                initial={{ opacity: 0, scale: 0.6, z: -600, y: 50, rotateX: 10 }}
+                animate={{ x: xOffset, scale, opacity, zIndex, rotateY, z, rotateX: 0, y: 0 }}
                 transition={CARD_SPRING}
                 className={`select-none ${rel === 0 ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer'}`}
                 drag={rel === 0 ? 'x' : false}

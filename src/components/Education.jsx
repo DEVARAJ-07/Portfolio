@@ -71,7 +71,7 @@ const hackathons = [
 
 export default function Education() {
     return (
-        <div className="max-w-5xl w-full mx-auto p-8 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
+        <div className="max-w-5xl w-full mx-auto p-5 md:p-10 rounded-[32px] vision-window h-[78vh] overflow-y-auto pr-4 vision-scrollbar">
             <div className="space-y-12">
                 {/* Education Timeline */}
                 <div>
