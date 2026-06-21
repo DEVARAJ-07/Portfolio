@@ -7,8 +7,6 @@ const educationList = [
         duration: "2023 – 2027",
         details: [
             "Currently pursuing a Bachelor of Engineering in CSE, focusing on full-stack web and mobile development.",
-            "Hands-on experience with MERN stack, Next.js, Flutter, and AWS cloud technologies.",
-            "Active participation in national-level and institutional hackathons.",
             "Academic standing: CGPA: 8.01"
         ]
     },
@@ -17,18 +15,14 @@ const educationList = [
         institution: "Cheran Matric Higher Secondary School",
         duration: "2023",
         details: [
-            "Completed higher secondary education with a strong academic score of 84%.",
-            "Developed a solid foundation in Mathematics, Physics, Chemistry, and Computer Science."
+            "Completed higher secondary education with a strong academic score of 84%."
         ]
     },
     {
         degree: "Secondary School Education (SSLC)",
         institution: "Cheran Matric Higher Secondary School",
         duration: "2021",
-        details: [
-            "Completed secondary school education with high honors.",
-            "Discovered early passion for software programming, logic design, and problem-solving."
-        ]
+        details: []
     }
 ]
 
