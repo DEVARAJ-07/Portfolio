@@ -10,10 +10,11 @@ const projectsList = [
         live: 'https://urscore-ai.vercel.app'
     },
     {
-        title: 'OutPost AI',
+        title: 'Nexus AI',
         desc: 'Currently Developing an AI-powered monitoring tool for CI/CD pipelines. It watches your builds in real time, detects failures instantly, and uses AI to explain what went wrong and how to fix it — turning confusing error logs into clear, actionable answers so developers can resolve issues faster without manual operations.',
         tech: ['AWS Lambda', 'S3', 'Bedrock', 'Next.js', 'DynamoDB'],
-        github: 'https://github.com/DEVARAJ-07/OutPost-AI'
+        github: 'https://github.com/DEVARAJ-07/Nexus-AI',
+        live: 'https://nexus-cicd-ai.vercel.app'
     },
     {
         title: 'The Smart ATM – Cardless Cash Withdrawal',
