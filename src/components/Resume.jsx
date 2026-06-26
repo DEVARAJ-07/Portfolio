@@ -71,8 +71,8 @@ Proficient in \\textbf{Flutter} cross-platform mobile development, \\textbf{CI/C
 {\\small
 \\begin{tabularx}{\\linewidth}{@{} l X @{}}
   \\textbf{Languages}               & Java, C, SQL, Python\\\\[2pt]
-  \\textbf{Frontend}                & React.js, Next.js, HTML5, CSS3, REST API Integration \\\\[2pt]
-  \\textbf{Backend}                 & Node.js, Express.js, FastAPI, JWT Authentication \\\\[2pt]
+  \\textbf{Frontend}                & React.js, Next.js, HTML5, CSS3, REST API  \\\\[2pt]
+  \\textbf{Backend}                 & Node.js, Express.js, FastAPI, SpringBoot \\\\[2pt]
   \\textbf{Mobile}                  & Flutter, Dart \\\\[2pt]
   \\textbf{Databases}               & MongoDB, MySQL, PostgreSQL, Supabase \\\\[2pt]
   \\textbf{Cloud \\& DevOps}         & AWS (EC2, S3, Lambda), Docker, CI/CD, GitHub Actions, Linux \\\\[2pt]
@@ -258,10 +258,10 @@ export default function Resume() {
                             <span className="col-span-9">Java, C, SQL, Python</span>
 
                             <span className="col-span-3 font-bold text-slate-850">Frontend:</span>
-                            <span className="col-span-9">React.js, Next.js, HTML5, CSS3, REST API Integration</span>
+                            <span className="col-span-9">React.js, Next.js, HTML5, CSS3, REST API</span>
 
                             <span className="col-span-3 font-bold text-slate-850">Backend:</span>
-                            <span className="col-span-9">Node.js, Express.js, FastAPI, JWT Authentication</span>
+                            <span className="col-span-9">Node.js, Express.js, FastAPI, SpringBoot</span>
 
                             <span className="col-span-3 font-bold text-slate-850">Mobile:</span>
                             <span className="col-span-9">Flutter, Dart</span>

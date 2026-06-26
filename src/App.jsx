@@ -31,7 +31,9 @@ const PAGE_COMPONENTS = [
 
 // Tightest spring that still looks organic — no mass property (framer default = 1 but omitting
 // lets framer use its tighter internal default), high stiffness = instant snap, damping kills bounce.
-const CARD_SPRING = { type: 'spring', stiffness: 220, damping: 28, mass: 0.8 }
+// Tightest spring that still looks organic — no mass property (framer default = 1 but omitting
+// lets framer use its tighter internal default), high stiffness = instant snap, damping kills bounce.
+const CARD_SPRING = { type: 'spring', stiffness: 260, damping: 30, mass: 0.7 }
 const HEADER_SPRING = { type: 'spring', stiffness: 420, damping: 32, mass: 0.5 }
 
 function App() {
@@ -116,7 +118,7 @@ function App() {
         <motion.div
           layout
           transition={HEADER_SPRING}
-          className={`px-5 py-2.5 rounded-full bg-[#05060b]/85 border backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.65)] flex items-center justify-center gap-3 transition-colors duration-200 ${
+          className={`px-5 h-10 rounded-full bg-[#05060b]/85 border backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.65)] flex items-center justify-center gap-3 transition-colors duration-200 ${
             isHeaderHovered
               ? 'border-teal-500/40 shadow-[0_0_15px_rgba(20,184,166,0.12)]'
               : 'border-white/10'
@@ -136,20 +138,27 @@ function App() {
             )}
           </AnimatePresence>
 
-          {/* Page Title */}
-          <div className="relative overflow-hidden flex items-center h-4 min-w-[90px] justify-center text-center">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={activePage}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.12, ease: 'easeOut' }}
-                className="text-xs md:text-sm font-semibold italic text-white/95 font-newsreader tracking-wide whitespace-nowrap"
-              >
-                {pagesList[activePage]?.title}
-              </motion.span>
-            </AnimatePresence>
+          {/* Page Title with Logo */}
+          <div className="flex items-center justify-center gap-2">
+            <img 
+              src={`${import.meta.env.BASE_URL}logo.png`} 
+              className="w-5 h-5 rounded-full object-contain border border-teal-500/20 shadow-[0_0_8px_rgba(20,184,166,0.3)] shrink-0" 
+              alt="Logo" 
+            />
+            <div className="relative overflow-hidden flex items-center justify-center h-5">
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.span
+                  key={activePage}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.12, ease: 'easeOut' }}
+                  className="text-xs md:text-sm font-semibold italic text-white/95 font-newsreader tracking-wide whitespace-nowrap flex items-center"
+                >
+                  {pagesList[activePage]?.title}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Right Arrow */}

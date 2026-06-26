@@ -92,16 +92,13 @@ export default function SpatialBackground() {
         </div>
       )}
 
-      {/* Floating Animated Nebula Orbs for ambient light overlay (Slightly dimmed to keep it clean) */}
-      {isVisible && (
-        <div className="absolute inset-0 w-full h-full mix-blend-screen opacity-20 z-15">
-          {/* Dark Blue/Teal Nebula Orb */}
-          <div className="absolute -top-1/4 -left-1/4 w-[75vw] h-[75vw] rounded-full bg-teal-800/12 blur-[130px] animate-float-slow" />
-          
-          {/* Slate/Indigo Nebula Orb */}
-          <div className="absolute -bottom-1/4 -right-1/4 w-[65vw] h-[65vw] rounded-full bg-slate-800/12 blur-[110px] animate-float-slower" />
-        </div>
-      )}
+      {/* Ambient light overlay via radial gradients (optimized, zero repaints) */}
+      <div 
+        className="absolute inset-0 w-full h-full opacity-20 z-15 pointer-events-none mix-blend-screen"
+        style={{
+          background: 'radial-gradient(circle at 15% 15%, rgba(20,184,166,0.18) 0%, transparent 65%), radial-gradient(circle at 85% 85%, rgba(99,102,241,0.18) 0%, transparent 65%)'
+        }}
+      />
 
       {/* Subtle Spatial Mesh / Grid Overlay for depth perspective */}
       <div 

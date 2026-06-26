@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { FaJava, FaCode, FaDatabase, FaAws, FaDocker, FaLinux, FaRobot, FaCss3Alt } from 'react-icons/fa'
-import { SiJavascript, SiPython, SiReact, SiNextdotjs, SiHtml5, SiNodedotjs, SiExpress, SiFastapi, SiJsonwebtokens, SiFlutter, SiDart, SiMongodb, SiMysql, SiPostgresql, SiSupabase, SiGit, SiGithub, SiPostman, SiAndroidstudio, SiGithubactions } from 'react-icons/si'
+import { SiPython, SiReact, SiNextdotjs, SiHtml5, SiNodedotjs, SiExpress, SiFastapi, SiFlutter, SiDart, SiMongodb, SiMysql, SiPostgresql, SiSupabase, SiGit, SiGithub, SiPostman, SiAndroidstudio, SiGithubactions, SiSpringboot } from 'react-icons/si'
 import { VscVscode } from 'react-icons/vsc'
 
 const skillCategories = [
@@ -10,8 +10,7 @@ const skillCategories = [
             { name: 'Java', icon: <FaJava className="text-2xl text-[#f89820]" /> },
             { name: 'C', icon: <FaCode className="text-2xl text-[#00599c]" /> },
             { name: 'SQL', icon: <FaDatabase className="text-2xl text-[#00758f]" /> },
-            { name: 'JavaScript', icon: <SiJavascript className="text-2xl text-[#f7df1e]" /> },
-            { name: 'Python (Basics)', icon: <SiPython className="text-2xl text-[#3776ab]" /> },
+            { name: 'Python', icon: <SiPython className="text-2xl text-[#3776ab]" /> },
         ],
     },
     {
@@ -29,8 +28,8 @@ const skillCategories = [
         skills: [
             { name: 'Node.js', icon: <SiNodedotjs className="text-2xl text-[#339933]" /> },
             { name: 'Express.js', icon: <SiExpress className="text-2xl text-slate-100" /> },
+            { name: 'Spring Boot', icon: <SiSpringboot className="text-2xl text-[#6db33f]" /> },
             { name: 'FastAPI', icon: <SiFastapi className="text-2xl text-[#009688]" /> },
-            { name: 'JWT Authentication', icon: <SiJsonwebtokens className="text-2xl text-[#fb015b]" /> },
         ],
     },
     {
