@@ -66,11 +66,11 @@ export default function SpatialBackground() {
           src={`${import.meta.env.BASE_URL}spatial_bg.png`}
           alt="Spatial Environment"
           fetchPriority="high"
-          className="w-full h-full object-cover opacity-98 brightness-[1.08] contrast-[1.01]"
+          className="w-full h-full object-cover opacity-100 brightness-[1.12] contrast-[1.02]"
         />
         
-        {/* Subtle dynamic overlay tint to enhance rainy environment */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-slate-950/30 mix-blend-multiply" />
+        {/* Subtle light ambient tint to enhance visibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/10 via-transparent to-slate-950/15 mix-blend-multiply" />
       </motion.div>
 
       {/* Atmospheric Rain Particles (Overlay on background layer) */}

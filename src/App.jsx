@@ -163,21 +163,6 @@ function App() {
             </AnimatePresence>
           </div>
 
-          {/* Page Progress Indicator Dots */}
-          <div className="flex items-center gap-1.5 px-1">
-            {pagesList.map((page, idx) => (
-              <button
-                key={page.id}
-                onClick={() => setActivePage(idx)}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  activePage === idx
-                    ? 'w-4 h-1.5 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]'
-                    : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/50'
-                }`}
-                aria-label={`Go to ${page.title}`}
-              />
-            ))}
-          </div>
 
           {/* Right Arrow Button */}
           <AnimatePresence>
@@ -247,8 +232,8 @@ function App() {
                   // GPU-promote this layer BEFORE the animation starts
                   willChange: 'transform, opacity',
                   pointerEvents: isVisible ? 'auto' : 'none',
-                  '--window-bg':     rel === 0 ? 'rgba(8,10,16,0.92)'  : 'rgba(12,14,22,0.65)',
-                  '--window-border': rel === 0 ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.11)',
+                  '--window-bg':     rel === 0 ? 'rgba(10,14,24,0.72)'  : 'rgba(12,16,28,0.45)',
+                  '--window-border': rel === 0 ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.12)',
                 }}
                 initial={{ opacity: 0, scale: 0.6, z: -600, y: 50, rotateX: 10 }}
                 animate={{ x: xOffset, scale, opacity, zIndex, rotateY, z, rotateX: 0, y: 0 }}

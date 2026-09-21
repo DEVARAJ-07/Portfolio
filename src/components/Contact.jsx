@@ -33,50 +33,207 @@ const links = [
   },
 ]
 
-// ── Paper Plane Flight Path for Sending State ──────────────────────────────
-function SendingPaperPlane() {
+// ── Hand-Drawn Pencil Letter Outside Send Animation ───────────────
+function LoveLetterSendOverlay({ status }) {
   return (
-    <div className="relative w-16 h-8 flex items-center justify-center overflow-visible">
-      {/* Flight trail dots */}
-      <div className="absolute inset-0 flex items-center justify-start gap-1 pl-2">
-        {[0, 1, 2, 3].map((dot) => (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="absolute inset-0 z-50 rounded-3xl bg-[#060810]/92 backdrop-blur-xl border border-white/15 flex flex-col items-center justify-center p-6 select-none shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden"
+    >
+      {/* Subtle Ambient Dispatch Particles (clean dots & soft sparkles, NO hearts) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[
+          { x: '22%', y: '65%', delay: 0.1, size: 'w-1.5 h-1.5' },
+          { x: '78%', y: '60%', delay: 0.4, size: 'w-2 h-2' },
+          { x: '30%', y: '30%', delay: 0.7, size: 'w-1 h-1' },
+          { x: '72%', y: '25%', delay: 0.9, size: 'w-1.5 h-1.5' },
+          { x: '50%', y: '18%', delay: 1.2, size: 'w-2 h-2' },
+        ].map((item, idx) => (
           <motion.div
-            key={dot}
-            className="w-1 h-1 bg-white/40 rounded-full"
-            initial={{ opacity: 0, scale: 0 }}
+            key={idx}
+            initial={{ opacity: 0, y: 25, scale: 0.5 }}
             animate={{
               opacity: [0, 0.8, 0],
-              scale: [0.5, 1, 0.5]
+              y: [20, -50],
+              scale: [0.5, 1.2, 0.5]
             }}
             transition={{
-              duration: 1.2,
+              duration: 2.2,
               repeat: Infinity,
-              delay: dot * 0.15,
-              ease: "easeInOut"
+              delay: item.delay,
+              ease: 'easeOut'
             }}
+            style={{ left: item.x, top: item.y }}
+            className={`absolute rounded-full bg-emerald-400/50 shadow-[0_0_8px_rgba(52,211,153,0.8)] pointer-events-none ${item.size}`}
           />
         ))}
       </div>
 
-      {/* Looping flying plane */}
-      <motion.div
-        animate={{
-          x: [-35, 35],
-          y: [8, -8],
-          rotate: [-45, -45],
-          opacity: [0, 1, 1, 0],
-          scale: [0.7, 1.1, 0.7]
-        }}
-        transition={{
-          duration: 1.4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="text-white text-sm absolute"
-      >
-        <FaPaperPlane className="transform -rotate-45" />
-      </motion.div>
-    </div>
+      {/* Main Mail & Letter Stage */}
+      <div className="relative w-48 h-40 flex items-center justify-center">
+        {/* Envelope Container: floats while sending, swooshes away when done */}
+        <motion.div
+          animate={
+            status === 'done'
+              ? {
+                  x: [0, -30, 320],
+                  y: [0, 15, -200],
+                  scale: [1, 1.05, 0.25],
+                  opacity: [1, 1, 0],
+                  rotate: [0, -8, 25]
+                }
+              : {
+                  y: [0, -8, 0]
+                }
+          }
+          transition={
+            status === 'done'
+              ? { duration: 0.95, ease: [0.25, 1, 0.5, 1] }
+              : { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }
+          }
+          className="relative w-40 h-28 flex items-center justify-center"
+        >
+          {/* 1. The Padded Hand-Made Letter with Pencil-Sketched Lines & Soft Rounded Edges */}
+          <motion.div
+            initial={{ y: -72, opacity: 0, scale: 0.92 }}
+            animate={{
+              y: [-72, -15, 6],
+              opacity: [0, 1, 0.35],
+              scale: [0.92, 0.9, 0.82]
+            }}
+            transition={{
+              duration: 1.8,
+              times: [0, 0.5, 0.95],
+              repeat: status === 'sending' ? Infinity : 0,
+              repeatDelay: 0.5,
+              ease: 'easeInOut'
+            }}
+            className="absolute z-10 w-32 h-24 bg-[#faf8f4] rounded-2xl p-3 shadow-[0_12px_28px_rgba(0,0,0,0.5)] flex flex-col justify-between border border-[#e5e0d4] pointer-events-none"
+            style={{
+              boxShadow: 'inset 0 0 10px rgba(0,0,0,0.03), 0 12px 28px rgba(0,0,0,0.55)'
+            }}
+          >
+            {/* Pencil sketch header */}
+            <div className="flex items-center justify-between px-0.5">
+              <svg width="24" height="8" viewBox="0 0 24 8" fill="none">
+                <path d="M1 4C5 2 8 6 13 4C17 2 20 6 23 4" stroke="#64748b" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="1.5 1" />
+              </svg>
+              <div className="w-9 h-1 bg-emerald-600/70 rounded-full" />
+            </div>
+
+            {/* Hand-drawn organic pencil text lines */}
+            <svg viewBox="0 0 100 32" className="w-full h-8 overflow-visible" fill="none">
+              <path d="M2 4 Q25 2, 50 4 T98 4" stroke="#475569" strokeWidth="1.3" strokeLinecap="round" strokeDasharray="2 1" />
+              <path d="M2 12 Q20 14, 45 12 T88 12" stroke="#475569" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="3 1" />
+              <path d="M2 20 Q30 19, 60 21 T75 20" stroke="#10b981" strokeWidth="1.3" strokeLinecap="round" strokeDasharray="2 0.8" opacity="0.85" />
+              <path d="M70 27 C75 24, 78 30, 85 26 C90 23, 93 28, 97 26" stroke="#475569" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+
+            {/* Subtle bottom note indicator */}
+            <div className="flex justify-between items-center px-0.5 text-[7px] text-slate-500 font-mono">
+              <span>DEVA</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
+            </div>
+          </motion.div>
+
+          {/* 2. Envelope Back Shell */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-slate-900 via-[#0e1628] to-[#070b14] border border-white/25 shadow-2xl" />
+
+          {/* 3. Envelope Top Flap that folds down and CLOSES */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '56px',
+              transformOrigin: 'top center',
+              zIndex: 30
+            }}
+            animate={{
+              rotateX: [180, 180, 0, 0] // Folds shut over the letter
+            }}
+            transition={{
+              duration: 1.8,
+              times: [0, 0.48, 0.88, 1],
+              repeat: status === 'sending' ? Infinity : 0,
+              repeatDelay: 0.5,
+              ease: 'easeInOut'
+            }}
+          >
+            <svg viewBox="0 0 160 56" className="w-full h-full drop-shadow-md" fill="none">
+              <polygon
+                points="0,0 80,56 160,0"
+                fill="#1e293b"
+                stroke="rgba(255,255,255,0.35)"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </motion.div>
+
+          {/* 4. Envelope Front Pocket */}
+          <svg viewBox="0 0 160 112" className="absolute inset-0 w-full h-full z-25 pointer-events-none" fill="none">
+            <polygon points="0,112 80,52 160,112" fill="#141e30" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+            <polygon points="0,0 80,58 0,112" fill="#0f172a" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+            <polygon points="160,0 80,58 160,112" fill="#0f172a" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+          </svg>
+
+          {/* 5. Minimalist Emerald Wax Seal with clean stamp icon (NO heart) */}
+          <motion.div
+            animate={{
+              scale: [0, 0, 1.35, 1],
+              opacity: [0, 0, 1, 1]
+            }}
+            transition={{
+              duration: 1.8,
+              times: [0, 0.65, 0.88, 1],
+              repeat: status === 'sending' ? Infinity : 0,
+              repeatDelay: 0.5,
+              ease: 'easeOut'
+            }}
+            className="absolute top-[38px] left-1/2 -translate-x-1/2 z-40 w-7 h-7 rounded-full bg-emerald-500 border border-emerald-300/40 shadow-[0_0_18px_rgba(52,211,153,0.95)] flex items-center justify-center text-[10px] text-slate-950 font-bold"
+          >
+            ✓
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Dynamic Status Text */}
+      <div className="mt-4 flex flex-col items-center gap-1.5 text-center">
+        {status === 'sending' && (
+          <>
+            <p className="text-lg font-newsreader italic text-white font-semibold tracking-wide flex items-center gap-2">
+              Sealing Your Letter...
+            </p>
+            <p className="text-xs text-emerald-400 font-sans tracking-wide">
+              Handwritten note moving into envelope & sealing shut
+            </p>
+          </>
+        )}
+
+        {status === 'done' && (
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="flex flex-col items-center gap-1.5 text-center"
+          >
+            <div className="flex items-center gap-2 text-emerald-300">
+              <span className="text-xl">✓</span>
+              <p className="text-lg font-newsreader italic font-semibold tracking-wide">
+                Message Dispatched & Delivered!
+              </p>
+            </div>
+            <p className="text-xs text-slate-300 font-sans tracking-wide">
+              Thank you! I will get back to you shortly.
+            </p>
+          </motion.div>
+        )}
+      </div>
+    </motion.div>
   )
 }
 
@@ -178,8 +335,15 @@ export default function Contact() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="p-6 rounded-3xl bg-white/[0.04] border border-white/10 shadow-lg"
+          className="relative p-6 rounded-3xl bg-white/[0.04] border border-white/10 shadow-lg overflow-hidden"
         >
+          {/* Outside Love Letter & Envelope Sealing Animation Overlay (Lottie style) */}
+          <AnimatePresence>
+            {(status === 'sending' || status === 'done') && (
+              <LoveLetterSendOverlay status={status} />
+            )}
+          </AnimatePresence>
+
           <form className="space-y-4" onSubmit={handleSubmit}>
 
             <div className="flex flex-col gap-1.5">
@@ -223,93 +387,16 @@ export default function Contact() {
               <p className="text-[10px] text-red-400 font-semibold px-1">⚠ {errorMsg}</p>
             )}
 
-            {/* ── THE BUTTON AREA ── */}
+            {/* Submit Button */}
             <div className="relative h-12 mt-4">
-              <AnimatePresence mode="wait">
-
-                {/* ─── IDLE: Clean pill button ─────────────────────────────── */}
-                {status === 'idle' && (
-                  <motion.button
-                    key="idle"
-                    type="submit"
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute inset-0 w-full rounded-full bg-white/8 border border-white/20 text-white font-newsreader italic tracking-wide text-sm flex items-center justify-center gap-2.5 hover:bg-white hover:text-black hover:border-white hover:scale-[1.01] active:scale-[0.98] transition-all duration-250 cursor-pointer group"
-                  >
-                    <FaPaperPlane className="text-[10px] transform -rotate-45 transition-transform duration-350 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                    Send Message
-                  </motion.button>
-                )}
-
-                {/* ─── SENDING: Paper Plane Take-Off Animation ──────────────── */}
-                {status === 'sending' && (
-                  <motion.div
-                    key="sending"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute inset-0 rounded-full border border-white/12 bg-slate-950/90 overflow-hidden flex items-center justify-center gap-2 font-newsreader italic text-sm tracking-wide text-white/80 select-none"
-                  >
-                    <SendingPaperPlane />
-                    <span className="animate-pulse">
-                      Sending...
-                    </span>
-                  </motion.div>
-                )}
-
-                {/* ─── ERROR ───────────────────────────────────────────────── */}
-                {status === 'error' && (
-                  <motion.div
-                    key="error"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute inset-0 rounded-full border border-red-400/30 bg-red-500/10 flex items-center justify-center text-red-300 font-newsreader italic text-sm tracking-wide"
-                  >
-                    ✕ Transmission Failed
-                  </motion.div>
-                )}
-
-                {/* ─── DONE: Paper Plane Taken Off + Message Sent ────────────── */}
-                {status === 'done' && (
-                  <motion.div
-                    key="done"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute inset-0 rounded-full border border-white/20 bg-white/8 overflow-hidden flex items-center justify-center gap-3"
-                  >
-                    {/* One-shot flight takeoff animation */}
-                    <motion.div
-                      initial={{ x: -15, y: 15, opacity: 1, scale: 1 }}
-                      animate={{ x: 160, y: -80, opacity: 0, scale: 0.4 }}
-                      transition={{ duration: 1.0, ease: [0.25, 1, 0.5, 1] }}
-                      className="text-white text-base absolute"
-                    >
-                      <FaPaperPlane className="transform -rotate-45" />
-                    </motion.div>
-
-                    {/* Success emoji + Text */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.45, type: 'spring', stiffness: 320, damping: 20 }}
-                      className="flex items-center gap-2"
-                    >
-                      <span className="text-sm select-none leading-none">📩</span>
-                      <span className="font-newsreader italic text-sm tracking-wide text-white/95 select-none font-medium">
-                        Message Sent
-                      </span>
-                    </motion.div>
-                  </motion.div>
-                )}
-
-              </AnimatePresence>
+              <button
+                type="submit"
+                disabled={status !== 'idle'}
+                className="w-full h-full rounded-full bg-white/8 border border-white/20 text-white font-newsreader italic tracking-wide text-sm flex items-center justify-center gap-2.5 hover:bg-white hover:text-black hover:border-white hover:scale-[1.01] active:scale-[0.98] transition-all duration-250 cursor-pointer group disabled:opacity-50 disabled:pointer-events-none"
+              >
+                <FaPaperPlane className="text-[10px] transform -rotate-45 transition-transform duration-350 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                {status === 'sending' ? 'Sending Message...' : status === 'done' ? 'Message Sent' : 'Send Message'}
+              </button>
             </div>
           </form>
         </motion.div>
