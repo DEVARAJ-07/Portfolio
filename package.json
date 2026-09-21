@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "contribute": "node scripts/daily-contribute.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

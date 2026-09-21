@@ -111,67 +111,88 @@ function App() {
 
       {/* Floating Dynamic Island Header */}
       <div
-        className="fixed top-12 left-1/2 -translate-x-1/2 z-[90] pointer-events-auto select-none flex justify-center"
+        className="fixed top-10 left-1/2 -translate-x-1/2 z-[90] pointer-events-auto select-none flex justify-center"
         onMouseEnter={() => setIsHeaderHovered(true)}
         onMouseLeave={() => setIsHeaderHovered(false)}
       >
         <motion.div
           layout
           transition={HEADER_SPRING}
-          className={`px-5 h-10 rounded-full bg-[#05060b]/85 border backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.65)] flex items-center justify-center gap-3 transition-colors duration-200 ${
+          className={`h-11 px-5 rounded-full bg-[#05070d]/80 border backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.18)] flex items-center justify-center gap-3 transition-all duration-300 ${
             isHeaderHovered
-              ? 'border-teal-500/40 shadow-[0_0_15px_rgba(20,184,166,0.12)]'
-              : 'border-white/10'
+              ? 'border-emerald-500/40 shadow-[0_0_25px_rgba(16,185,129,0.15),0_20px_50px_rgba(0,0,0,0.85)] scale-[1.02]'
+              : 'border-white/15'
           }`}
         >
-          {/* Left Arrow */}
+          {/* Left Arrow Button */}
           <AnimatePresence>
             {isHeaderHovered && activePage > 0 && (
               <motion.button
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -8 }}
-                transition={{ duration: 0.12 }}
+                initial={{ opacity: 0, scale: 0.8, x: -6 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.8, x: -6 }}
+                transition={{ duration: 0.15 }}
                 onClick={() => setActivePage(p => Math.max(0, p - 1))}
-                className="text-white/60 hover:text-teal-400 text-[10px] font-bold px-1.5 py-0.5 rounded hover:bg-white/5 transition-colors cursor-pointer"
-              >◀</motion.button>
+                className="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 text-white/70 hover:text-emerald-400 text-xs flex items-center justify-center transition-colors cursor-pointer"
+                title="Previous"
+              >
+                ‹
+              </motion.button>
             )}
           </AnimatePresence>
 
-          {/* Page Title with Logo */}
-          <div className="flex items-center justify-center gap-2">
-            <img 
-              src={`${import.meta.env.BASE_URL}logo.png`} 
-              className="w-5 h-5 rounded-full object-contain border border-teal-500/20 shadow-[0_0_8px_rgba(20,184,166,0.3)] shrink-0" 
-              alt="Logo" 
-            />
-            <div className="relative overflow-hidden flex items-center justify-center h-5">
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.span
-                  key={activePage}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.12, ease: 'easeOut' }}
-                  className="text-xs md:text-sm font-semibold italic text-white/95 font-newsreader tracking-wide whitespace-nowrap flex items-center"
-                >
-                  {pagesList[activePage]?.title}
-                </motion.span>
-              </AnimatePresence>
-            </div>
+          {/* Active Status Pulse Indicator */}
+          <div className="relative flex items-center justify-center">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
+            <span className="absolute w-3 h-3 rounded-full bg-emerald-400/30 animate-ping pointer-events-none" />
           </div>
 
-          {/* Right Arrow */}
+          {/* Dynamic Island Title */}
+          <div className="relative overflow-hidden flex items-center justify-center min-w-[70px] h-6 px-1">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={activePage}
+                initial={{ opacity: 0, y: 7, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -7, filter: 'blur(4px)' }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                className="text-xs md:text-sm font-semibold tracking-wide text-white/95 whitespace-nowrap flex items-center font-newsreader italic"
+              >
+                {pagesList[activePage]?.title}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
+          {/* Page Progress Indicator Dots */}
+          <div className="flex items-center gap-1.5 px-1">
+            {pagesList.map((page, idx) => (
+              <button
+                key={page.id}
+                onClick={() => setActivePage(idx)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activePage === idx
+                    ? 'w-4 h-1.5 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]'
+                    : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/50'
+                }`}
+                aria-label={`Go to ${page.title}`}
+              />
+            ))}
+          </div>
+
+          {/* Right Arrow Button */}
           <AnimatePresence>
             {isHeaderHovered && activePage < pagesList.length - 1 && (
               <motion.button
-                initial={{ opacity: 0, x: 8 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 8 }}
-                transition={{ duration: 0.12 }}
+                initial={{ opacity: 0, scale: 0.8, x: 6 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.8, x: 6 }}
+                transition={{ duration: 0.15 }}
                 onClick={() => setActivePage(p => Math.min(pagesList.length - 1, p + 1))}
-                className="text-white/60 hover:text-teal-400 text-[10px] font-bold px-1.5 py-0.5 rounded hover:bg-white/5 transition-colors cursor-pointer"
-              >▶</motion.button>
+                className="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 text-white/70 hover:text-emerald-400 text-xs flex items-center justify-center transition-colors cursor-pointer"
+                title="Next"
+              >
+                ›
+              </motion.button>
             )}
           </AnimatePresence>
         </motion.div>

@@ -1,0 +1,39 @@
+﻿name: 1. Morning Contribution (10:00 AM IST)
+
+on:
+  schedule:
+    # 10:00 AM IST = 04:30 UTC
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  morning-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "DEVARAJ-07"
+          git config --global user.email "devakrs07@gmail.com"
+
+      - name: Run Morning Contribution Script
+        run: |
+          COMMIT_MSG=$(node scripts/daily-contribute.js --slot=morning)
+          echo "Commit message: $COMMIT_MSG"
+          git add .github/activity.log
+          git commit -m "$COMMIT_MSG"
+          git pull --rebase origin main
+          git push origin main

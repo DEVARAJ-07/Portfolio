@@ -51,7 +51,7 @@ const skillCategories = [
     {
         title: 'Cloud & DevOps',
         skills: [
-            { name: 'AWS (EC2, S3, Lambda)', icon: <FaAws className="text-2xl text-[#ff9900]" /> },
+            { name: 'AWS', icon: <FaAws className="text-2xl text-[#ff9900]" /> },
             { name: 'Docker', icon: <FaDocker className="text-2xl text-[#2496ed]" /> },
             { name: 'CI/CD & GitHub Actions', icon: <SiGithubactions className="text-2xl text-[#2088ff]" /> },
             { name: 'Linux', icon: <FaLinux className="text-2xl text-[#fcc624]" /> },
