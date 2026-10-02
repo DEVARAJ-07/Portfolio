@@ -3,6 +3,12 @@ import { FaGithub, FaGlobe } from 'react-icons/fa'
 
 const projectsList = [
     {
+        title: 'EVE – Personal System Monitoring Assistant (Currently Working & Developing)',
+        desc: 'EVE is a personal, always-on-screen assistant that continuously watches your system’s health — tracking per-application CPU, GPU, memory usage, active processes, and system logs in real time with system-level access. Built with an intelligent monitoring engine that detects overloaded or unresponsive applications and automatically terminates them to maintain stability, paired with real-time WhatsApp notifications and mobile alerts whenever system thresholds are exceeded.',
+        tech: ['Next.js', 'Node.js'],
+        github: 'https://github.com/DEVARAJ-07/eve'
+    },
+    {
         title: 'UrScore AI',
         desc: 'UrScore AI is a smart platform that helps developers show their real skills and helps recruiters find the right people easily. Instead of trusting what someone writes on a resume, UrScore AI looks at what they have actually done and gives them an honest score based on their real work.',
         tech: ['AWS', 'EC2', 'S3', 'Next.js', 'MongoDB Atlas', 'GitHub'],

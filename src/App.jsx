@@ -29,12 +29,16 @@ const PAGE_COMPONENTS = [
   <Contact   key={5} />,
 ]
 
-// Tightest spring that still looks organic — no mass property (framer default = 1 but omitting
-// lets framer use its tighter internal default), high stiffness = instant snap, damping kills bounce.
-// Tightest spring that still looks organic — no mass property (framer default = 1 but omitting
-// lets framer use its tighter internal default), high stiffness = instant snap, damping kills bounce.
-const CARD_SPRING = { type: 'spring', stiffness: 260, damping: 30, mass: 0.7 }
-const HEADER_SPRING = { type: 'spring', stiffness: 420, damping: 32, mass: 0.5 }
+// Ultra-smooth spring physics tuned for fluid, organic card gliding (Apple-style damping)
+const CARD_TRANSITION = {
+  type: 'spring',
+  stiffness: 165,
+  damping: 25,
+  mass: 0.85,
+  restDelta: 0.001,
+  opacity: { duration: 0.42, ease: [0.25, 1, 0.5, 1] },
+}
+const HEADER_SPRING = { type: 'spring', stiffness: 340, damping: 30, mass: 0.6 }
 
 function App() {
   const [activePage, setActivePage] = useState(1)
@@ -56,7 +60,7 @@ function App() {
   // Wheel/trackpad navigation
   useEffect(() => {
     let lastScrollTime = 0
-    const COOLDOWN  = 850   // ms between page changes — slightly snappier than 950
+    const COOLDOWN  = 650   // ms between page changes — aligned with smooth card glide
     const THRESHOLD = 35
 
     const handleWheel = (e) => {
@@ -141,21 +145,16 @@ function App() {
             )}
           </AnimatePresence>
 
-          {/* Active Status Pulse Indicator */}
-          <div className="relative flex items-center justify-center">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
-            <span className="absolute w-3 h-3 rounded-full bg-emerald-400/30 animate-ping pointer-events-none" />
-          </div>
 
           {/* Dynamic Island Title */}
           <div className="relative overflow-hidden flex items-center justify-center min-w-[70px] h-6 px-1">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={activePage}
-                initial={{ opacity: 0, y: 7, filter: 'blur(4px)' }}
+                initial={{ opacity: 0, y: 8, filter: 'blur(3px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -7, filter: 'blur(4px)' }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
+                exit={{ opacity: 0, y: -8, filter: 'blur(3px)' }}
+                transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
                 className="text-xs md:text-sm font-semibold tracking-wide text-white/95 whitespace-nowrap flex items-center font-newsreader italic"
               >
                 {pagesList[activePage]?.title}
@@ -171,7 +170,7 @@ function App() {
                 initial={{ opacity: 0, scale: 0.8, x: 6 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.8, x: 6 }}
-                transition={{ duration: 0.15 }}
+                transition={{ duration: 0.18 }}
                 onClick={() => setActivePage(p => Math.min(pagesList.length - 1, p + 1))}
                 className="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 text-white/70 hover:text-emerald-400 text-xs flex items-center justify-center transition-colors cursor-pointer"
                 title="Next"
@@ -195,28 +194,27 @@ function App() {
           {PAGE_COMPONENTS.map((component, index) => {
             const rel = index - activePage
 
-            // Only render active card + immediate neighbours — skip far cards entirely
-            // This is the biggest perf win: avoids mounting 4 pages worth of motion.divs simultaneously
-            const isVisible = Math.abs(rel) <= 1
+            // Keep buffer of ±2 so cards sliding out retain DOM content throughout the entire exit glide
+            const isVisible = Math.abs(rel) <= 2
 
             let xOffset = '0px', scale = 1, opacity = 0, zIndex = 10, rotateY = 0, z = 0
 
             if (rel === 0) {
               xOffset = '0px'; scale = 1; opacity = 1; zIndex = 30; rotateY = 0; z = 0
             } else if (rel === -1) {
-              xOffset = isMobile ? '-100vw' : '-58vw'
-              scale   = isMobile ? 0.75 : 0.78
-              opacity = isMobile ? 0 : 0.72
-              zIndex  = 20; rotateY = isMobile ? 0 : 25; z = isMobile ? -200 : -220
+              xOffset = isMobile ? '-100vw' : '-56vw'
+              scale   = isMobile ? 0.76 : 0.80
+              opacity = isMobile ? 0 : 0.75
+              zIndex  = 20; rotateY = isMobile ? 0 : 18; z = isMobile ? -160 : -180
             } else if (rel === 1) {
-              xOffset = isMobile ? '100vw' : '58vw'
-              scale   = isMobile ? 0.75 : 0.78
-              opacity = isMobile ? 0 : 0.72
-              zIndex  = 20; rotateY = isMobile ? 0 : -25; z = isMobile ? -200 : -220
+              xOffset = isMobile ? '100vw' : '56vw'
+              scale   = isMobile ? 0.76 : 0.80
+              opacity = isMobile ? 0 : 0.75
+              zIndex  = 20; rotateY = isMobile ? 0 : -18; z = isMobile ? -160 : -180
             } else if (rel < -1) {
-              xOffset = '-100vw'; scale = 0.65; opacity = 0; zIndex = 10; rotateY = 35; z = -350
+              xOffset = '-100vw'; scale = 0.65; opacity = 0; zIndex = 10; rotateY = 25; z = -300
             } else {
-              xOffset = '100vw';  scale = 0.65; opacity = 0; zIndex = 10; rotateY = -35; z = -350
+              xOffset = '100vw';  scale = 0.65; opacity = 0; zIndex = 10; rotateY = -25; z = -300
             }
 
             return (
@@ -229,22 +227,29 @@ function App() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   transformStyle: 'preserve-3d',
-                  // GPU-promote this layer BEFORE the animation starts
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
+                  zIndex,
                   willChange: 'transform, opacity',
                   pointerEvents: isVisible ? 'auto' : 'none',
                   '--window-bg':     rel === 0 ? 'rgba(10,14,24,0.72)'  : 'rgba(12,16,28,0.45)',
                   '--window-border': rel === 0 ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.12)',
                 }}
-                initial={{ opacity: 0, scale: 0.6, z: -600, y: 50, rotateX: 10 }}
-                animate={{ x: xOffset, scale, opacity, zIndex, rotateY, z, rotateX: 0, y: 0 }}
-                transition={CARD_SPRING}
+                initial={{ opacity: 0, scale: 0.6, z: -500, y: 40, rotateX: 8 }}
+                animate={{ x: xOffset, scale, opacity, rotateY, z, rotateX: 0, y: 0 }}
+                transition={CARD_TRANSITION}
                 className={`select-none ${rel === 0 ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer'}`}
                 drag={rel === 0 ? 'x' : false}
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.35}
+                dragElastic={0.25}
                 onDragEnd={(_, info) => {
-                  if (info.offset.x < -55) handleNavigate(Math.min(pagesList.length - 1, activePage + 1))
-                  else if (info.offset.x > 55) handleNavigate(Math.max(0, activePage - 1))
+                  const swipeDist = 50
+                  const swipeVel = 280
+                  if (info.offset.x < -swipeDist || info.velocity.x < -swipeVel) {
+                    handleNavigate(Math.min(pagesList.length - 1, activePage + 1))
+                  } else if (info.offset.x > swipeDist || info.velocity.x > swipeVel) {
+                    handleNavigate(Math.max(0, activePage - 1))
+                  }
                 }}
                 onClick={() => {
                   if (rel === -1) handleNavigate(activePage - 1)
